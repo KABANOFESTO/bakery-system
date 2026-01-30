@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-    title: "Bakery Management System",
+    title: "Bakery Ineza",
     description: "Uruyange Coffee Shop",
     icons: {
         icon: '/favicon.ico',

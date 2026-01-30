@@ -33,7 +33,7 @@ const Recommended: React.FC = () => {
         <div id="Recommendation" className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-800">RECOMMENDED BY</h2>
           <div className="flex flex-wrap justify-center gap-6 mt-6">
-            {["1.5.jpg", "RWANDAN COFFE.jpeg", "INDIA.jpg", "logo.jpg"].map(
+            {["bakery1.jpg", "bakery2.jpeg", "bakery3.jpg", "logo.jpg"].map(
               (img, index) => (
                 <div key={index} className="relative w-40 h-40">
                   <Image
