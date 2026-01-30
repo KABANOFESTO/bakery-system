@@ -28,7 +28,7 @@ export default function Footer() {
             <li><Link href="/contact" className="hover:text-gray-300 transition-colors">Contact Us</Link></li>
             <li><Link href="/Blog" className="hover:text-gray-300 transition-colors">Blog</Link></li>
             <li><Link href="/Press" className="hover:text-gray-300 transition-colors">Press</Link></li>
-            <li><Link href="/Give5Get5" className="hover:text-gray-300 transition-colors">Give $5, Get $5</Link></li>
+            <li><Link href="/Give5Get5" className="hover:text-gray-300 transition-colors">Give 5000 RWF, Get 5000 RWF</Link></li>
           </ul>
         </div>
 
@@ -48,14 +48,14 @@ export default function Footer() {
           </div>
           <p className="font-semibold">SUPPORT</p>
           <a href="tel:+48452037323" className="text-white hover:text-gray-300 transition-colors">
-          +48 45 203 73 23
+            +250785206973
           </a>
         </div>
       </div>
 
       {/* Footer Bottom Section */}
       <div className="text-gray-300 space-y-2 text-center">
-        <p>We&rsquo;re located in The West End — a historic MMM</p>
+        <p>We&rsquo;re located in The Kigali City — a historic MMM</p>
         <p>neighborhood with a rich history of black entrepreneurs</p>
         <p>and culture. We&rsquo;re honored to have you as a partner</p>
         <p>in this journey to revitalize black and brown entrepreneurship.</p>
@@ -82,7 +82,7 @@ export default function Footer() {
           </Link>
         </div>
         <div>
-          <p className="text-gray-300">© 2025 Uruyange Coffee</p>
+          <p className="text-gray-300">© 2026 Bakery Ineza</p>
         </div>
       </div>
     </footer>
