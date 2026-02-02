@@ -72,7 +72,7 @@ const AdminPaymentsDashboard = () => {
     const formatDate = (dateString: string): string => {
         if (!dateString) return '-';
         const date = new Date(dateString);
-        return new Intl.DateTimeFormat('en-US', {
+        return new Intl.DateTimeFormat('rw-RW', {
             year: 'numeric',
             month: 'short',
             day: 'numeric',
@@ -82,7 +82,7 @@ const AdminPaymentsDashboard = () => {
     };
 
     const formatCurrency = (amount: number): string => {
-        return new Intl.NumberFormat('en-US', {
+        return new Intl.NumberFormat('rw-RW', {
             style: 'currency',
             currency: 'RWF',
         }).format(amount || 0);

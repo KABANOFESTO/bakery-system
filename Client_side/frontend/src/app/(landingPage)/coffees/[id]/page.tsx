@@ -29,7 +29,7 @@ const CoffeePage: React.FC<CoffeePageProps> = ({ params: paramsPromise }) => {
   if (isLoading) {
     return (
       <div className="h-screen flex items-center justify-center pt-32">
-        <div className="animate-pulse text-xl">Loading coffee details...</div>
+        <div className="animate-pulse text-xl">Loading bread details...</div>
       </div>
     );
   }
@@ -38,13 +38,13 @@ const CoffeePage: React.FC<CoffeePageProps> = ({ params: paramsPromise }) => {
     return (
       <div className="h-screen flex items-center justify-center pt-32">
         <div className="text-red-500 text-xl">
-          Sorry, we couldn&rsquo;t find this coffee.
+          Sorry, we couldn&rsquo;t find this bread.
           <div className="mt-4">
             <Link
               href="/coffees"
               className="bg-black text-white py-2 px-4 rounded-lg"
             >
-              Back to coffees
+              Back to Products
             </Link>
           </div>
         </div>
@@ -114,7 +114,7 @@ const CoffeePage: React.FC<CoffeePageProps> = ({ params: paramsPromise }) => {
           </Link>{" "}
           /{" "}
           <Link href="/coffees" className="text-gray-500 hover:text-black">
-            Coffees
+            Products
           </Link>{" "}
           / <span className="text-gray-900 font-medium">{coffee.title}</span>
         </div>
@@ -167,9 +167,9 @@ const CoffeePage: React.FC<CoffeePageProps> = ({ params: paramsPromise }) => {
                   </p>
                   <p>
                     Sourced from sustainable farms and roasted to perfection,
-                    our coffee beans guarantee a fresh and flavorful cup every
+                    our bread guarantee a fresh and flavorful pakage every
                     time. Perfect for{" "}
-                    {coffee.title.includes("Espresso")
+                    {coffee.title.includes("Wheat")
                       ? "a morning energy boost"
                       : "a relaxing afternoon break"}.
                   </p>
@@ -269,7 +269,7 @@ const CoffeePage: React.FC<CoffeePageProps> = ({ params: paramsPromise }) => {
                         d="M5 13l4 4L19 7"
                       />
                     </svg>
-                    <span>Free shipping on orders over $50</span>
+                    <span>Free Delivery on orders over $50</span>
                   </div>
                   <div className="flex items-center space-x-2 text-sm text-gray-600">
                     <svg

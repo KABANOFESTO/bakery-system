@@ -82,7 +82,7 @@ export default function Footer() {
           </Link>
         </div>
         <div>
-          <p className="text-gray-300">© 2025 Uruyange Coffee</p>
+          <p className="text-gray-300">© 2026 Bakery Ineza</p>
         </div>
       </div>
     </footer>

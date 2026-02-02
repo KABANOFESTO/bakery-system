@@ -7,8 +7,8 @@ interface FAQItem {
 
 const faqs: FAQItem[] = [
   {
-    question: 'What makes Uruyange Coffee special?',
-    answer: 'Uruyange Coffee is sourced from the finest high-altitude farms in Rwanda, ensuring rich flavors and ethical sourcing.',
+    question: 'What makes Bakery Ineza special?',
+    answer: 'Bakery Ineza is sourced from the finest high-altitude farms in Rwanda, ensuring rich flavors and ethical sourcing.',
   },
   {
     question: 'Do you offer international shipping?',

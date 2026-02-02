@@ -167,7 +167,7 @@ const ContactPage = () => {
                                     </div>
                                     <div>
                                         <h3 className="font-bold text-gray-700">Location</h3>
-                                        <p className="text-gray-600 mt-1">Kigali, Rwanda</p>
+                                        <p className="text-gray-600 mt-1">Bugesera, Rwanda</p>
                                     </div>
                                 </div>
 
@@ -178,7 +178,7 @@ const ContactPage = () => {
                                     <div>
                                         <h3 className="font-bold text-gray-700">Email</h3>
                                         <a href="mailto:marcellinabimana@gmail.com" className="text-blue-600 hover:underline mt-1">
-                                        marcellinabimana@gmail.com
+                                        inezabakery@gmail.com
                                         </a>
                                     </div>
                                 </div>
@@ -190,7 +190,7 @@ const ContactPage = () => {
                                     <div>
                                         <h3 className="font-bold text-gray-700">Phone</h3>
                                         <a href="tel:+48452037323" className="text-blue-600 hover:underline mt-1">
-                                        +48452037323
+                                        +250788563705
                                         </a>
                                     </div>
                                 </div>
@@ -246,12 +246,12 @@ const ContactPage = () => {
                     <div className="grid md:grid-cols-2 gap-6">
                         <div className="bg-white p-6 rounded-xl shadow-md">
                             <h3 className="text-xl font-bold mb-3 text-yellow-600">What are your business hours?</h3>
-                            <p className="text-gray-600">We&rsquo;re available Monday through Friday from 8:00 AM to 6:00 PM Kigali time. On weekends, our hours are 10:00 AM to 4:00 PM.</p>
+                            <p className="text-gray-600">We&rsquo;re available Monday through Friday from 8:00 AM to 7:00 PM Kigali time. On weekends, our hours are 10:00 AM to 4:00 PM.</p>
                         </div>
 
                         <div className="bg-white p-6 rounded-xl shadow-md">
                             <h3 className="text-xl font-bold mb-3 text-yellow-600">Do you offer international shipping?</h3>
-                            <p className="text-gray-600">Yes, we ship our premium coffee worldwide. Shipping times and costs vary based on location.</p>
+                            <p className="text-gray-600">Yes, we ship our premium bread worldwide. Shipping times and costs vary based on location.</p>
                         </div>
 
                         <div className="bg-white p-6 rounded-xl shadow-md">

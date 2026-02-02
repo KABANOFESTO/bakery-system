@@ -50,7 +50,7 @@ const About = () => {
               </div>
             </div>
             <div className="w-full md:w-1/2">
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">About Bakery Management System</h2>
+              <h2 className="text-4xl font-bold text-gray-900 mb-6">About Bakery Ineza </h2>
               <p className="text-lg text-gray-700 mb-6">
                 We are passionate about bringing you the finest breads from
                 the heart of Rwanda. Our ingredients are carefully selected from the pristine hills of the Kivu
@@ -116,7 +116,7 @@ const About = () => {
             </div>
             <div className="text-center p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
               <div className="text-4xl mb-4 text-yellow-600">🌍</div>
-              <h3 className="text-xl font-bold mb-2 text-gray-800">Worldwide Shipping</h3>
+              <h3 className="text-xl font-bold mb-2 text-gray-800">Upcountry Shipping</h3>
               <p className="text-gray-600">Fresh bread delivered to your doorstep, wherever you are.</p>
             </div>
             <div className="text-center p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow">
@@ -192,9 +192,9 @@ const About = () => {
       {/* Call to Action */}
       <section className="py-16 bg-gray-900 text-white">
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold mb-4">Join Us on This Bakery Journey</h2>
+          <h2 className="text-3xl font-bold mb-4">Join Us on This Bakery Ineza Journey</h2>
           <p className="mb-8 max-w-2xl mx-auto">
-            At Uruyange Bakery, we believe that bread is more than a food—it&rsquo;s an
+            At Bakery Ineza, we believe that bread is more than a food—it&rsquo;s an
             experience. Discover the perfect blend for your taste today.
           </p>
           <Link href="/ourcoffee" className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-6 rounded shadow transition-colors">

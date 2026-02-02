@@ -5,13 +5,13 @@ import React from "react";
 const Give5Get5: React.FC = () => {
   return (
     <div className="min-h-screen bg-white py-20 px-6 sm:px-10 max-w-4xl mx-auto" style={{ padding: "150px 20px" }}>
-      <h1 className="text-4xl font-bold text-amber-900 mb-8 text-center">Give $5, Get $5</h1>
+      <h1 className="text-4xl font-bold text-amber-900 mb-8 text-center">Give 10k, Get 1k</h1>
       <p className="mb-6 text-gray-700">
-        Love Uruyange Coffee? Share it with your friends and everyone wins! When you refer a friend, they’ll get $5 off
+        Love Bakery Ineza? Share it with your friends and everyone wins! When you refer a friend, they’ll get $5 off
         their first purchase — and you’ll get $5 credit once they place an order.
       </p>
       <p className="mb-6 text-gray-700">
-        It’s our way of saying thank you for spreading the word. Start referring today and enjoy coffee on us.
+        It’s our way of saying thank you for spreading the word. Start referring today and enjoy Bread on us.
         Check your account dashboard to get your referral link!
       </p>
     </div>

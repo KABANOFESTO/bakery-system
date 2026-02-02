@@ -246,7 +246,7 @@ const PaymentForm = () => {
                 <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/images/me5.webp')" }}></div>
                 <div className="absolute inset-0 bg-black/50"></div>
                 <div className="relative z-10 px-6">
-                    <h1 className="text-4xl md:text-5xl font-bold mb-4">Discover the World Through Coffee</h1>
+                    <h1 className="text-4xl md:text-5xl font-bold mb-4">Discover the World Through Bakery</h1>
                     <p className="mb-6 text-lg max-w-lg mx-auto">
                         Explore single-origin coffees from the best growers worldwide. Delivered fresh to your door.
                     </p>
@@ -327,7 +327,7 @@ const PaymentForm = () => {
                     <section id="coffee-type-selection" className="py-16 bg-gray-100">
                         <div className="container mx-auto px-6">
                             <div className="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-lg">
-                                <h2 className="text-3xl font-bold mb-6 text-center">Select Your Coffee Type</h2>
+                                <h2 className="text-3xl font-bold mb-6 text-center">Select Your product Type</h2>
                                 <h3 className="text-xl mb-6 text-center">
                                     Selected Plan: <span className="font-semibold text-blue-600">{selectedPlan && selectedPlan?.name}</span> - {selectedPlan && selectedPlan?.price}
                                 </h3>
@@ -347,7 +347,7 @@ const PaymentForm = () => {
                                                     className="rounded-full"
                                                 />
                                             </div>
-                                            <h3 className="text-xl font-bold mb-2">Ground Coffee</h3>
+                                            <h3 className="text-xl font-bold mb-2">Capati</h3>
                                             <p className="text-gray-600 text-center">Perfect for drip machines and French presses</p>
                                         </div>
                                     </div>
@@ -365,7 +365,7 @@ const PaymentForm = () => {
                                                     className="rounded-full"
                                                 />
                                             </div>
-                                            <h3 className="text-xl font-bold mb-2">Whole Beans</h3>
+                                            <h3 className="text-xl font-bold mb-2">All Breads</h3>
                                             <p className="text-gray-600 text-center">For those who prefer to grind fresh</p>
                                         </div>
                                     </div>

@@ -10,7 +10,7 @@ const PrivacyPolicy: React.FC = () => {
       </h1>
 
       <p className="mb-6 text-gray-700 text-lg leading-relaxed">
-        At Uruyange Coffee, we respect your privacy and are committed to
+        At Bakery Ineza, we respect your privacy and are committed to
         protecting your personal information. This policy outlines how we
         collect, use, and safeguard your data when you interact with our
         website or services.
@@ -62,7 +62,7 @@ const PrivacyPolicy: React.FC = () => {
           href="mailto:marcellinabimana@gmail.com"
           className="text-amber-800 underline"
         >
-          marcellinabimana@gmail.com
+          inezabakery@gmail.com
         </a>
         .
       </p>
@@ -76,7 +76,7 @@ const PrivacyPolicy: React.FC = () => {
       </p>
 
       <p className="text-gray-700 text-lg">
-        Last updated: April 16, 2025
+        Last updated: February 1, 2026
       </p>
     </div>
   );

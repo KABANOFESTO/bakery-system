@@ -17,9 +17,9 @@ const FAQ: React.FC = () => {
 
   const faqData: FAQItem[] = [
     {
-      question: "What services does Uruyange Coffee provide?",
+      question: "What services does Bakery Ineza provide?",
       answer:
-        "We provide premium coffee sourcing, quality assurance, export logistics, and partnership opportunities for coffee importers worldwide.",
+        "We provide premium bread sourcing, quality assurance, export logistics, and partnership opportunities for Bread importers worldwide.",
     },
     {
       question: "Which countries do you export to?",
@@ -32,8 +32,8 @@ const FAQ: React.FC = () => {
         "You can use the contact form on our Contact page or email us directly at info@uruyangecoffee.com.",
     },
     {
-        question: 'What makes Uruyange Coffee special?',
-        answer: 'Uruyange Coffee is sourced from the finest high-altitude farms in Rwanda, ensuring rich flavors and ethical sourcing.',
+        question: 'What makes Bakery Ineza special?',
+        answer: 'Bakery Ineza  is sourced from the finest high-altitude farms in Rwanda, ensuring rich flavors and ethical sourcing.',
       },
       {
         question: 'Do you offer international shipping?',
@@ -45,7 +45,7 @@ const FAQ: React.FC = () => {
       },
       {
         question: 'Are your products organic?',
-        answer: 'Yes, all our coffee beans are organically grown without harmful chemicals or pesticides.',
+        answer: 'Yes, all our Bread Flavor beans are organically grown without harmful chemicals or pesticides.',
       },
       {
         question: 'Can I return or exchange my order?',

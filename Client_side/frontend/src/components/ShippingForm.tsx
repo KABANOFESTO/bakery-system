@@ -91,7 +91,7 @@ const ShippingForm = ({setIsPay, quantity, coffee }: ShippingType) => {
                 className="bg-white w-full md:w-[70%] lg:w-1/2 p-10 rounded-lg flex flex-col gap-6"
                 onClick={(e) => e.stopPropagation()}
             >
-                <h1 className="text-center font-semibold text-xl">SHIPPING ADDRESS</h1>
+                <h1 className="text-center font-semibold text-xl">Delivery ADDRESS</h1>
 
                 <Formik
                     initialValues={{
@@ -171,7 +171,7 @@ const ShippingForm = ({setIsPay, quantity, coffee }: ShippingType) => {
                             <div>
                                 <Field as="select" name="paymentMethod" className="p-2 border rounded w-full">
                                     <option value="">Select Payment Method</option>
-                                    <option value="card">Card</option>
+                                    <option value="card">MasterCard</option>
                                     <option value="apple-pay">Apple Pay</option>
                                 </Field>
                                 <ErrorMessage name="paymentMethod" component="div" className="text-red-500 text-sm" />

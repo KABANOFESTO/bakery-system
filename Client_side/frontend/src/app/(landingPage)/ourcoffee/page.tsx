@@ -4,9 +4,9 @@ import { useRouter } from "next/navigation";
 import Benefits from "../Landing/Benefits/page";
 
 const coffeeTypes = [
-  { name: "Espresso", image: "/images/Espresso.jpg" },
-  { name: "Latte", image: "/images/Latte.jpg" },
-  { name: "Cappuccino", image: "/images/Cappuccino.jpg" },
+  { name: "Whole Wheat", image: "/images/Espresso.jpg" },
+  { name: "Cake", image: "/images/Latte.jpg" },
+  { name: "Capati", image: "/images/Cappuccino.jpg" },
   { name: "Americano", image: "/images/Americano.jpg" },
 ];
 
@@ -24,7 +24,7 @@ const OurCoffee: React.FC = () => {
 
         {/* Hero Content */}
         <div className="relative z-10 px-6">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Discover the World Through Bakery</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">Discover the World Through Bakery Ineza</h1>
           <p className="mb-6 text-lg max-w-lg mx-auto">
             Explore single-origin breads from the best bakers worldwide. Delivered fresh to your door.
           </p>
@@ -32,7 +32,7 @@ const OurCoffee: React.FC = () => {
             onClick={() => router.push("/coffees")}
             className="bg-yellow-500 text-white py-3 px-6 rounded-lg shadow-lg hover:bg-yellow-600 transition"
           >
-            Start Your Journey
+            Ryoherwa hamwe na Bakery Ineza
           </button>
         </div>
       </section>
