@@ -154,7 +154,7 @@ const CoffeePage: React.FC<CoffeePageProps> = ({ params: paramsPromise }) => {
                   <span className="ml-2 text-gray-600">(42 reviews)</span>
                 </div>
                 <p className="text-2xl font-bold text-gray-900 mb-6">
-                  ${(coffee.price * quantity).toFixed(2)}
+                  RWF {(coffee.price * quantity).toFixed(2)}
                 </p>
 
                 <div className="prose prose-sm text-gray-600 mb-8">
@@ -269,7 +269,7 @@ const CoffeePage: React.FC<CoffeePageProps> = ({ params: paramsPromise }) => {
                         d="M5 13l4 4L19 7"
                       />
                     </svg>
-                    <span>Free Delivery on orders over $50</span>
+                    <span>Free Delivery on orders over RWF 50</span>
                   </div>
                   <div className="flex items-center space-x-2 text-sm text-gray-600">
                     <svg

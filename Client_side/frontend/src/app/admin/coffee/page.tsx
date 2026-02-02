@@ -205,7 +205,7 @@ const CoffeeManagement: React.FC = () => {
                             />
                             <h2 className="text-xl font-semibold mb-1">{coffee.title}</h2>
                             <p className="text-gray-600 mb-2">{coffee.description}</p>
-                            <p className="text-green-700 font-bold mb-4">${coffee.price.toFixed(2)}</p>
+                            <p className="text-green-700 font-bold mb-4">RWF {coffee.price.toFixed(2)}</p>
                             <div className="flex gap-2">
                                 <button className="bg-blue-500 text-white px-3 py-1 rounded" onClick={() => handleEdit(coffee)}>
                                     Edit

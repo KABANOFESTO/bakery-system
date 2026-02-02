@@ -1,5 +1,5 @@
 "use client"
-import { Home, Coffee, Users, HelpCircle, LogOut, Menu, X, DollarSign } from "lucide-react";
+import { Home, Coffee, Users, HelpCircle, LogOut, Menu, X, DollarSign, Package } from "lucide-react";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -18,6 +18,27 @@ const items = [
         url: "/admin/coffee",
         icon: Coffee,
     },
+    {
+        title: "Stock Management",
+        url: "/admin/stock",
+        icon: Package,
+    },
+    {
+        title: "Raw Materials",
+        url: "/admin/raw-materials",
+        icon: Package,
+    },
+    {
+        title: "Daily Production",
+        url: "/admin/daily-production",
+        icon: Package,
+    },
+    {
+        title: "Daily Sales",
+        url: "/admin/daily-sales",
+        icon: Package,
+    },
+
     {
         title: "Subscribtions",
         url: "/admin/subscribers",
@@ -56,7 +77,7 @@ export default function SideBar() {
             </button>
 
             <nav className={`
-                inset-y-0 left-0 
+                inset-y-0 left-0
                 h-full
                 w-full
                 transition-transform duration-300 ease-in-out

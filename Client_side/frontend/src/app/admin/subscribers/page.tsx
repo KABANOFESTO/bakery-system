@@ -91,7 +91,7 @@ const SubscriptionsPage = () => {
                         {subscriptions?.map((sub: Subscription) => (
                             <tr key={sub.id}>
                                 <td className="py-2 px-4 border">{sub.name}</td>
-                                <td className="py-2 px-4 border">${sub.price}</td>
+                                <td className="py-2 px-4 border">RWF {sub.price}</td>
                                 <td className="py-2 px-4 border">
                                     <button
                                         onClick={() => handleEdit(sub)}

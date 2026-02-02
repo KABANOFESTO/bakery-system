@@ -17,11 +17,11 @@ const CoffeesPage: React.FC = () => {
     const itemsPerPage = 16; // 16 items per page
 
     if (isLoading) {
-        return <div className="text-center py-12 mt-32">Loading coffees...</div>;
+        return <div className="text-center py-12 mt-32">Loading bread...</div>;
     }
 
     if (isError) {
-        return <div className="text-center py-12 mt-32 text-red-500">Error loading coffees.</div>;
+        return <div className="text-center py-12 mt-32 text-red-500">Error loading bread.</div>;
     }
 
     // Pagination logic
@@ -57,7 +57,7 @@ const CoffeesPage: React.FC = () => {
                                     />
                                 </div>
                                 <h3 className="mt-4 text-lg font-semibold text-gray-800">{coffee.title}</h3>
-                                <p className="text-gray-600">${coffee.price.toFixed(2)}</p>
+                                <p className="text-gray-600">RWF {coffee.price.toFixed(2)}</p>
                             </div>
                         </Link>
                     ))}

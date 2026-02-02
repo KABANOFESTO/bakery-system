@@ -139,10 +139,10 @@ const PaymentForm = () => {
 
     const getPlanPriceDisplay = (name: string, price: number) => {
         switch (name) {
-            case 'weekly': return `$${price.toFixed(2)}/week`;
-            case 'monthly': return `$${price.toFixed(2)}/month`;
-            case 'yearly': return `$${price.toFixed(2)}/year`;
-            default: return `$${price}`;
+            case 'weekly': return `RWF ${price.toFixed(2)}/week`;
+            case 'monthly': return `RWF ${price.toFixed(2)}/month`;
+            case 'yearly': return `RWF ${price.toFixed(2)}/year`;
+            default: return `RWF ${price}`;
         }
     };
 
@@ -329,7 +329,7 @@ const PaymentForm = () => {
                             <div className="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-lg">
                                 <h2 className="text-3xl font-bold mb-6 text-center">Select Your product Type</h2>
                                 <h3 className="text-xl mb-6 text-center">
-                                    Selected Plan: <span className="font-semibold text-blue-600">{selectedPlan && selectedPlan?.name}</span> - {selectedPlan && selectedPlan?.price}
+                                    Selected Plan: <span className="font-semibold text-blue-600">{selectedPlan && selectedPlan?.name}</span> - RWF {selectedPlan && selectedPlan?.price}
                                 </h3>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
