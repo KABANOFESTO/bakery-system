@@ -1,11 +1,9 @@
-import { PrismaClient } from "@prisma/client";
 import { createPaymentDTO, getPaymentDTO } from "../DTOs/paymentDTO";
 import Stripe from "stripe";
 import { Payment } from "../../types/paymentTypes";
+import { prisma } from "../config/database";
 
 type PaymentData = Omit<Payment, "id" | "paymentDate" | "stripePaymentId"> & { userId: string, paymentMethodId: string };
-
-const prisma = new PrismaClient();
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
   apiVersion: "2025-02-24.acacia",
 });

@@ -1,5 +1,5 @@
 "use client"
-import { Home, Coffee, Users, HelpCircle, LogOut, Menu, X, DollarSign } from "lucide-react";
+import { Home, Coffee, Users, HelpCircle, LogOut, Menu, X, DollarSign, Box } from "lucide-react";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -29,10 +29,20 @@ const items = [
         icon: Users,
     },
     {
+        title: "Stock Management",
+        url: "/admin/stock",
+        icon: Box,
+    },
+    {
         title: "Support",
         url: "/admin/support",
         icon: HelpCircle,
     },
+    {
+        title: "Setting",
+        url: "/admin/setting",
+        icon: HelpCircle,
+    }
 ];
 
 export default function SideBar() {

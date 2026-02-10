@@ -1,8 +1,6 @@
-import { PrismaClient } from "@prisma/client";
 import SubscriptionDTO from "../DTOs/subscriptionDTO";
 import { SubscriptionUser } from "../../types/subscriptionTypes";
-
-const prisma = new PrismaClient();
+import { prisma } from "../config/database";
 
 const subscriptionService = {
     createSubscription: async (subscriptionData: any) => {

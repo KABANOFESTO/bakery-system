@@ -1,7 +1,5 @@
-import { PrismaClient } from '@prisma/client';
 import CoffeeDTO from '../DTOs/coffeeDTO';
-
-const prismaClient = new PrismaClient();
+import { prisma as prismaClient } from '../config/database';
 
 const coffeeService = {
     createCoffee: async (coffeeData: any): Promise<ReturnType<typeof CoffeeDTO.getCoffeeDTO>> => {

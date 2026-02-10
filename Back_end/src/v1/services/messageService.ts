@@ -1,7 +1,5 @@
-import { PrismaClient } from '@prisma/client';
 import { CreateMessageDTO, MessageDTO } from '../DTOs/messageDTO';
-
-const prismaClient = new PrismaClient();
+import { prisma as prismaClient } from '../config/database';
 
 const toMessageDTO = (message: any): MessageDTO => {
     return {

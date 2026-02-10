@@ -1,7 +1,7 @@
-import { PrismaClient,} from '@prisma/client';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import userDTO from '../DTOs/userDTO';
+import { prisma } from '../config/database';
 
 type UserData = {
   name: string;
@@ -13,8 +13,6 @@ type LoginResponse = {
   user: ReturnType<typeof userDTO.getUserDTO>;
   token: string;
 };
-
-const prisma = new PrismaClient();
 
 export const userService = {
   createUser: async (userData: UserData): Promise<ReturnType<typeof userDTO.getUserDTO>> => {
