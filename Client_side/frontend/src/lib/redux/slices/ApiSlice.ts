@@ -13,7 +13,7 @@ export const apiSlice = createApi({
       return headers;
     },
   }),
-  tagTypes: [],
+  tagTypes: ['Stock', 'StockItem', 'StockMovement', 'StockStatistics'],
   endpoints: () => ({}),
 });
 // builder

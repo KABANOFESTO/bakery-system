@@ -5,10 +5,18 @@ const stockApi = apiSlice.injectEndpoints({
         // Stock Items Endpoints
         getAllStockItems: builder.query({
             query: () => ({ url: "/stock/items" }),
+            transformResponse: (response: { success: boolean; data: any[] }) => {
+                return response?.success ? response.data : response;
+            },
+            providesTags: [{ type: 'StockItem' as const, id: 'LIST' }],
         }),
 
         getStockItemById: builder.query({
             query: (id) => ({ url: `/stock/items/${id}` }),
+            transformResponse: (response: { success: boolean; data: any }) => {
+                return response?.success ? response.data : response;
+            },
+            providesTags: (result, error, id) => [{ type: 'StockItem' as const, id }],
         }),
 
         createStockItem: builder.mutation({
@@ -17,6 +25,10 @@ const stockApi = apiSlice.injectEndpoints({
                 method: "POST",
                 body: data
             }),
+            invalidatesTags: [
+                { type: 'StockItem' as const, id: 'LIST' },
+                { type: 'StockStatistics' as const }
+            ],
         }),
 
         updateStockItem: builder.mutation({
@@ -25,6 +37,11 @@ const stockApi = apiSlice.injectEndpoints({
                 method: "PUT",
                 body: data
             }),
+            invalidatesTags: (result, error, { id }) => [
+                { type: 'StockItem' as const, id },
+                { type: 'StockItem' as const, id: 'LIST' },
+                { type: 'StockStatistics' as const }
+            ],
         }),
 
         deleteStockItem: builder.mutation({
@@ -32,6 +49,11 @@ const stockApi = apiSlice.injectEndpoints({
                 url: `/stock/items/${id}`,
                 method: "DELETE"
             }),
+            invalidatesTags: (result, error, id) => [
+                { type: 'StockItem' as const, id },
+                { type: 'StockItem' as const, id: 'LIST' },
+                { type: 'StockStatistics' as const }
+            ],
         }),
 
         // Stock Movement Endpoints
@@ -41,6 +63,12 @@ const stockApi = apiSlice.injectEndpoints({
                 method: "POST",
                 body: data
             }),
+            invalidatesTags: [
+                { type: 'StockItem' as const, id: 'LIST' },
+                { type: 'StockItem' as const },
+                { type: 'StockMovement' as const },
+                { type: 'StockStatistics' as const }
+            ],
         }),
 
         stockOut: builder.mutation({
@@ -49,6 +77,12 @@ const stockApi = apiSlice.injectEndpoints({
                 method: "POST",
                 body: data
             }),
+            invalidatesTags: [
+                { type: 'StockItem' as const, id: 'LIST' },
+                { type: 'StockItem' as const },
+                { type: 'StockMovement' as const },
+                { type: 'StockStatistics' as const }
+            ],
         }),
 
         getStockMovements: builder.query({
@@ -64,6 +98,10 @@ const stockApi = apiSlice.injectEndpoints({
                     url: `/stock/movements${params.toString() ? `?${params.toString()}` : ''}`
                 };
             },
+            transformResponse: (response: { success: boolean; data: any[] }) => {
+                return response?.success ? response.data : response;
+            },
+            providesTags: [{ type: 'StockMovement' as const, id: 'LIST' }],
         }),
 
         getStockMovementById: builder.query({
@@ -73,10 +111,18 @@ const stockApi = apiSlice.injectEndpoints({
         // Stock Statistics & Reports
         getLowStockItems: builder.query({
             query: () => ({ url: "/stock/low-stock" }),
+            transformResponse: (response: { success: boolean; data: any[] }) => {
+                return response?.success ? response.data : response;
+            },
+            providesTags: [{ type: 'StockItem' as const, id: 'LOW_STOCK' }],
         }),
 
         getStockStatistics: builder.query({
             query: () => ({ url: "/stock/statistics" }),
+            transformResponse: (response: { success: boolean; data: any }) => {
+                return response?.success ? response.data : response;
+            },
+            providesTags: [{ type: 'StockStatistics' as const }],
         }),
     }),
 });

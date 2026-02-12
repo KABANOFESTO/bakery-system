@@ -53,18 +53,21 @@ export const stockService = {
 
   // Create new stock item
   createStockItem: async (itemData: CreateStockItemDTO) => {
+    // Ensure currentStock has a default value if not provided
+    const currentStock = itemData.currentStock ?? 0;
+    
     const item = await prisma.stockItem.create({
       data: {
         name: itemData.name,
         category: itemData.category,
-        currentStock: itemData.currentStock,
+        currentStock: currentStock,
         unit: itemData.unit,
         minStock: itemData.minStock,
         maxStock: itemData.maxStock,
         reorderPoint: itemData.reorderPoint,
         supplier: itemData.supplier,
         costPerUnit: itemData.costPerUnit,
-        lastRestocked: itemData.currentStock > 0 ? new Date() : null,
+        lastRestocked: currentStock > 0 ? new Date() : null,
       },
     });
     return stockDTO.getStockItemDTO(item);

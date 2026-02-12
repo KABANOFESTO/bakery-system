@@ -36,7 +36,7 @@ export interface StockMovement {
 export interface CreateStockItemDTO {
   name: string;
   category: 'Ingredients' | 'Products' | 'Packaging';
-  currentStock: number;
+  currentStock?: number; // Optional, defaults to 0 if not provided
   unit: string;
   minStock: number;
   maxStock: number;
