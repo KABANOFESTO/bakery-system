@@ -21,9 +21,6 @@ import {
 
 import {
     useGetAllStockItemsQuery,
-    useCreateStockItemMutation,
-    useUpdateStockItemMutation,
-    useDeleteStockItemMutation,
     useStockInMutation,
     useStockOutMutation,
     useGetStockMovementsQuery,
@@ -92,14 +89,18 @@ const StockManagementPage = () => {
     const [showStockOutModal, setShowStockOutModal] = useState(false);
     const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set());
 
-    // RTK Query Hooks
-    const { data: stockItems = [], isLoading: loadingItems } = useGetAllStockItemsQuery({});
-    const { data: lowStockItems = [], isLoading: loadingLowStock } = useGetLowStockItemsQuery({});
+    // RTK Query Hooks - FIXED: Add safety checks for array data
+    const { data: stockItemsData, isLoading: loadingItems } = useGetAllStockItemsQuery({});
+    const { data: lowStockItemsData } = useGetLowStockItemsQuery({});
     const { data: statistics, isLoading: loadingStats } = useGetStockStatisticsQuery({});
+
+    // Safely handle non-array responses
+    const stockItems = Array.isArray(stockItemsData) ? stockItemsData : [];
+    const lowStockItems = Array.isArray(lowStockItemsData) ? lowStockItemsData : [];
 
     // Build filters for movements query
     const movementFilters = useMemo(() => {
-        const filters: any = {};
+        const filters: Record<string, string> = {};
         if (filterMovementType !== 'All') filters.type = filterMovementType;
         if (dateFrom) filters.dateFrom = dateFrom;
         if (dateTo) filters.dateTo = dateTo;
@@ -107,7 +108,9 @@ const StockManagementPage = () => {
         return filters;
     }, [filterMovementType, dateFrom, dateTo, searchTerm]);
 
-    const { data: stockMovements = [], isLoading: loadingMovements } = useGetStockMovementsQuery(movementFilters);
+    // FIXED: Safely handle stock movements data
+    const { data: stockMovementsData, isLoading: loadingMovements } = useGetStockMovementsQuery(movementFilters);
+    const stockMovements = Array.isArray(stockMovementsData) ? stockMovementsData : [];
 
     // Mutations
     const [stockIn, { isLoading: isStockingIn }] = useStockInMutation();
@@ -165,8 +168,9 @@ const StockManagementPage = () => {
             });
             setShowStockInModal(false);
             alert('Stock received successfully!');
-        } catch (error: any) {
-            alert(error?.data?.message || 'Failed to receive stock');
+        } catch (error: unknown) {
+            alert('Failed to receive stock');
+            console.error('Stock IN error:', error);
         }
     };
 
@@ -196,8 +200,9 @@ const StockManagementPage = () => {
             });
             setShowStockOutModal(false);
             alert('Stock issued successfully!');
-        } catch (error: any) {
-            alert(error?.data?.message || 'Failed to issue stock');
+        } catch (error: unknown) {
+            alert('Failed to issue stock');
+            console.error('Stock OUT error:', error);
         }
     };
 
@@ -211,7 +216,13 @@ const StockManagementPage = () => {
         setExpandedRows(newExpanded);
     };
 
+    // FIXED: Add safety check for export function
     const exportToCSV = () => {
+        if (!stockMovements.length) {
+            alert('No data to export');
+            return;
+        }
+
         const headers = ['Date', 'Item', 'Type', 'Quantity', 'Previous Stock', 'New Stock', 'Reference', 'User', 'Reason'];
         const csvData = stockMovements.map((m: StockMovement) => [
             m.date,
@@ -227,7 +238,7 @@ const StockManagementPage = () => {
 
         const csvContent = [
             headers.join(','),
-            ...csvData.map((row: any) => row.join(','))
+            ...csvData.map((row: unknown[]) => row.join(','))
         ].join('\n');
 
         const blob = new Blob([csvContent], { type: 'text/csv' });
@@ -236,15 +247,18 @@ const StockManagementPage = () => {
         a.href = url;
         a.download = `stock-movements-${new Date().toISOString().split('T')[0]}.csv`;
         a.click();
+        window.URL.revokeObjectURL(url);
     };
 
     // Format date helper
     const formatDate = (dateString: string) => {
+        if (!dateString) return 'N/A';
         const date = new Date(dateString);
         return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
     };
 
     const formatTime = (dateString: string) => {
+        if (!dateString) return 'N/A';
         const date = new Date(dateString);
         return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
     };
