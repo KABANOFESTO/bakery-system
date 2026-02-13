@@ -143,7 +143,7 @@ const StockManagementPage = () => {
     const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set());
     const [timeFilter, setTimeFilter] = useState<TimeFilter>('daily');
     const [isCreatingStockItem, setIsCreatingStockItem] = useState(false);
-    const [selectedCoffeeProduct, setSelectedCoffeeProduct] = useState<CoffeeItem | null>(null);
+    const [, setSelectedCoffeeProduct] = useState<CoffeeItem | null>(null);
     const [processingCoffeeId, setProcessingCoffeeId] = useState<string | null>(null);
     const [manualRefreshTrigger, setManualRefreshTrigger] = useState(0);
 
@@ -156,7 +156,7 @@ const StockManagementPage = () => {
     } = useGetAllStockItemsQuery({});
 
     const { data: lowStockItemsData } = useGetLowStockItemsQuery({});
-    const { data: statistics, isLoading: loadingStats } = useGetStockStatisticsQuery({});
+    const { isLoading: loadingStats } = useGetStockStatisticsQuery({});
 
     // Coffee Items Query
     const { data: coffeeItemsData, isLoading: loadingCoffees } = useCoffeesQuery({});
@@ -168,7 +168,7 @@ const StockManagementPage = () => {
     // Mutations
     const [stockIn, { isLoading: isStockingIn }] = useStockInMutation();
     const [stockOut, { isLoading: isStockingOut }] = useStockOutMutation();
-    const [createStockItem, { isLoading: isCreating }] = useCreateStockItemMutation();
+    const [createStockItem] = useCreateStockItemMutation();
 
     // Safely handle non-array responses
     const stockItems = useMemo(() => {
