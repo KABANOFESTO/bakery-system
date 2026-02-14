@@ -3,9 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getPaymentDTO = exports.createPaymentDTO = void 0;
 const createPaymentDTO = (payment) => ({
     email: payment.email,
-    cardNumber: payment.cardNumber,
-    expiryDate: payment.expiryDate,
-    cvv: payment.cvv,
     firstName: payment.firstName ?? '',
     lastName: payment.lastName ?? '',
     address: payment.address,
@@ -18,7 +15,9 @@ const createPaymentDTO = (payment) => ({
     planPrice: payment.planPrice,
     userId: payment.userId ?? null,
     subscriptionId: payment.subscriptionId ?? null,
-    paymentMethodId: payment.paymentMethodId,
+    paymentMethod: payment.paymentMethod ?? '',
+    coffeeType: payment.coffeeType ?? undefined,
+    roastPreference: payment.roastPreference ?? undefined,
 });
 exports.createPaymentDTO = createPaymentDTO;
 const getPaymentDTO = (payment) => ({
@@ -27,8 +26,9 @@ const getPaymentDTO = (payment) => ({
     planName: payment.planName,
     planPrice: Number(payment.planPrice),
     paymentDate: payment.paymentDate ? payment.paymentDate.toISOString() : undefined,
-    stripePaymentId: payment.stripePaymentId ?? undefined,
-    paymentMethodId: payment.paymentMethodId,
+    paymentMethod: payment.paymentMethod ?? 'Unknown',
+    coffeeType: payment.coffeeType,
+    roastPreference: payment.roastPreference,
 });
 exports.getPaymentDTO = getPaymentDTO;
 //# sourceMappingURL=paymentDTO.js.map

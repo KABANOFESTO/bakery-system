@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const client_1 = require("@prisma/client");
-const prismaClient = new client_1.PrismaClient();
+const database_1 = require("../config/database");
 const toMessageDTO = (message) => {
     return {
         id: message.id,
@@ -13,26 +12,26 @@ const toMessageDTO = (message) => {
 };
 const messageService = {
     createMessage: async (messageData) => {
-        const message = await prismaClient.message.create({
+        const message = await database_1.prisma.message.create({
             data: messageData,
         });
         return toMessageDTO(message);
     },
     getAllMessages: async () => {
-        const messages = await prismaClient.message.findMany();
+        const messages = await database_1.prisma.message.findMany();
         return messages.map(toMessageDTO);
     },
     getMessageById: async (id) => {
-        const message = await prismaClient.message.findUnique({
+        const message = await database_1.prisma.message.findUnique({
             where: { id }
         });
         return message ? toMessageDTO(message) : null;
     },
     deleteMessage: async (id) => {
-        await prismaClient.message.delete({ where: { id } });
+        await database_1.prisma.message.delete({ where: { id } });
     },
     updateMessage: async (id, messageData) => {
-        const updatedMessage = await prismaClient.message.update({
+        const updatedMessage = await database_1.prisma.message.update({
             where: { id },
             data: messageData,
         });

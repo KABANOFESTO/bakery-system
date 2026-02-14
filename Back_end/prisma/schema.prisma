@@ -12,12 +12,18 @@ model User {
   email            String             @unique
   password         String
   role             String             @default("user") // Add this line
+  username         String?
+  profilePicture   String?
   createdAt        DateTime           @default(now())
+  updatedAt        DateTime?          @updatedAt
   coffees          Coffee[]
   subscriptions    Subscription[]
   payments         Payment[]
   SubscriptionUser SubscriptionUser[]
   stockMovements   StockMovement[]
+  rawMaterials     RawMaterial[]
+  dailySales       DailySale[]
+  dailyProductions DailyProduction[]
 }
 
 model Coffee {
@@ -152,4 +158,43 @@ model StockMovement {
   expiryDate    DateTime?
   purchasePrice Float?
   createdAt     DateTime          @default(now())
+}
+
+model RawMaterial {
+  id           String    @id @default(auto()) @map("_id") @db.ObjectId
+  itemName     String
+  quantity     Float
+  pricePerUnit Float
+  totalPrice   Float
+  date         DateTime
+  purchasedBy  String
+  userId       String?   @db.ObjectId
+  user         User?     @relation(fields: [userId], references: [id])
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime? @updatedAt
+}
+
+model DailySale {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  item          String
+  openingStock  Float
+  quantitySold  Float
+  pricePerUnit  Float
+  totalPrice    Float
+  userId        String?   @db.ObjectId
+  user          User?     @relation(fields: [userId], references: [id])
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime? @updatedAt
+}
+
+model DailyProduction {
+  id               String    @id @default(auto()) @map("_id") @db.ObjectId
+  item             String
+  quantityProduced Float
+  timeProduced     DateTime
+  remark           String?
+  userId           String?   @db.ObjectId
+  user             User?     @relation(fields: [userId], references: [id])
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime? @updatedAt
 }

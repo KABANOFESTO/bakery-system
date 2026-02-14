@@ -5,12 +5,14 @@ const SubscriptionDTO = {
         name: subscription.name,
         price: subscription.price,
         userId: subscription.userId,
+        email: subscription.email, // Added email field
     }),
     getSubscriptionDTO: (subscription) => ({
         id: subscription.id,
         name: subscription.name,
         price: subscription.price,
         createdAt: subscription.createdAt,
+        email: subscription.email, // Added email field
     })
 };
 exports.default = SubscriptionDTO;

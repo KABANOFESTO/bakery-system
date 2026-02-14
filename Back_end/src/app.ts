@@ -14,7 +14,11 @@ app.get('/', (req: Request, res: Response, next: NextFunction) => {
 
 app.use(cors());
 app.use((req, res, next) => {
+    // Skip JSON parsing for webhook and multipart/form-data requests
     if (req.originalUrl === "/api/v1/webhook") {
+      next();
+    } else if (req.headers['content-type']?.includes('multipart/form-data')) {
+      // Let multer handle multipart/form-data
       next();
     } else {
       express.json()(req, res, next);

@@ -8,7 +8,9 @@ const subscriptionController_1 = __importDefault(require("../controllers/subscri
 const router = express_1.default.Router();
 router.post('/subscriptions', subscriptionController_1.default.createSubscription);
 router.get('/subscriptions', subscriptionController_1.default.getSubscriptions);
+router.get('/suscriptionUser', subscriptionController_1.default.getBoughtSubscription);
 router.delete('/subscriptions/:id', subscriptionController_1.default.deleteSubscription);
 router.put('/subscriptions/:id', subscriptionController_1.default.updateSubscription);
+router.post('/buySubscription', subscriptionController_1.default.buySubscription);
 exports.default = router;
 //# sourceMappingURL=subscriptionRoutes.js.map

@@ -9,5 +9,6 @@ const authMiddleware_1 = __importDefault(require("../middlewares/authMiddleware"
 const router = express_1.default.Router();
 router.post('/payments', authMiddleware_1.default, paymentController_1.paymentController.createPayment);
 router.get('/payments', authMiddleware_1.default, paymentController_1.paymentController.getPayments);
+router.post("/webhook", express_1.default.raw({ type: 'application/json' }), paymentController_1.paymentController.webhookFunc);
 exports.default = router;
 //# sourceMappingURL=paymentRoutes.js.map

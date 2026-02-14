@@ -2,6 +2,14 @@ import { Request, Response } from 'express';
 import { userService } from '../services/userService';
 import { apiResponse } from '../utils/apiResponse';
 
+interface AuthenticatedRequest extends Request {
+  user?: {
+    id: string;
+    email: string;
+    role: string;
+  };
+}
+
 export const userController = {
   createUser: async (req: Request, res: Response): Promise<void> => {
     const userData = req.body;
@@ -43,6 +51,56 @@ export const userController = {
       apiResponse.success(res, { user, token });
     } catch (error: any) {
       apiResponse.error(res, error.message, 401);
+    }
+  },
+
+  updateProfile: async (req: AuthenticatedRequest, res: Response): Promise<void> => {
+    try {
+      const userId = req.user?.id;
+      if (!userId) {
+        apiResponse.error(res, 'User not authenticated', 401);
+        return;
+      }
+
+      const updateData: any = {};
+      
+      // Extract form data
+      if (req.body.username) {
+        updateData.username = req.body.username;
+      }
+      
+      if (req.body.current_password) {
+        updateData.currentPassword = req.body.current_password;
+      }
+      
+      if (req.body.new_password) {
+        updateData.newPassword = req.body.new_password;
+      }
+
+      // Handle file upload
+      if (req.file) {
+        updateData.profilePicture = req.file;
+      }
+
+      const result = await userService.updateProfile(userId, updateData);
+      // Return in format expected by frontend (snake_case)
+      apiResponse.success(res, {
+        username: result.username,
+        profile_picture: result.profilePicture,
+      });
+    } catch (error: any) {
+      // Handle specific error types
+      if (error.message.includes('Current password')) {
+        apiResponse.error(res, error.message, 400);
+      } else if (error.message.includes('password')) {
+        apiResponse.error(res, error.message, 400);
+      } else if (error.message.includes('Username')) {
+        apiResponse.error(res, error.message, 400);
+      } else if (error.message.includes('profile picture')) {
+        apiResponse.error(res, error.message, 400);
+      } else {
+        apiResponse.error(res, error.message || 'Failed to update profile', 400);
+      }
     }
   },
 };

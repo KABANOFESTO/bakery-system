@@ -1,5 +1,5 @@
 "use client"
-import { Home, Coffee, Users, HelpCircle, LogOut, Menu, X, DollarSign, Box } from "lucide-react";
+import { Home, Coffee, Users, HelpCircle, LogOut, Menu, X, DollarSign, Box, ShoppingCart, Factory } from "lucide-react";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -34,9 +34,19 @@ const items = [
         icon: Box,
     },
     {
-        title: "Support",
-        url: "/admin/support",
-        icon: HelpCircle,
+        title: "Raw Materials",
+        url: "/admin/raw-materials",
+        icon: Box,
+    },
+    {
+        title: "Sales",
+        url: "/admin/daily-sales",
+        icon: ShoppingCart,
+    },
+    {
+        title: "Daily Production",
+        url: "/admin/daily-production",
+        icon: Factory,
     },
     {
         title: "Setting",
