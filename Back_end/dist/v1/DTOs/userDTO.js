@@ -10,7 +10,13 @@ const userDTO = {
         id: user.id,
         email: user.email,
         role: user.role,
+        username: user.username || null,
+        profilePicture: user.profilePicture || null,
         createdAt: user.createdAt,
+    }),
+    getUpdateProfileDTO: (data) => ({
+        username: data.username,
+        profilePicture: data.profilePicture,
     })
 };
 exports.default = userDTO;
