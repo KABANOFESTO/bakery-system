@@ -52,6 +52,11 @@ const items = [
         url: "/admin/payment",
         icon: Users,
     },
+    {
+        title: "User Management",
+        url: "/admin/user-management",
+        icon: Users,
+    },
     
     {
         title: "Setting",

@@ -11,10 +11,13 @@ const authApi = apiSlice.injectEndpoints({
         getAllUsers: builder.query({
             query: () => ({ url: "/users", method: "GET" }),
         }),
+        adminCreateUser: builder.mutation({
+            query: (data) => ({ url: "/users/admin-create", method: "POST", body: data }),
+        }),
         updateProfile: builder.mutation({
             query: (data) => ({ url: "/users/update-profile", method: "PATCH", body: data }),
         }),
     }),
 });
 
-export const { useLoginMutation, useRegisterMutation, useGetAllUsersQuery, useUpdateProfileMutation } = authApi;
+export const { useLoginMutation, useRegisterMutation, useGetAllUsersQuery, useAdminCreateUserMutation, useUpdateProfileMutation } = authApi;

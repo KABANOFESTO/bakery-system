@@ -1,13 +1,22 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import { randomBytes } from 'crypto';
 import userDTO from '../DTOs/userDTO';
 import { prisma } from '../config/database';
 import { uploadToCloudinary } from '../utils/cloudinary';
+import { emailService } from '../utils/emailService';
 
 type UserData = {
-  name: string;
   email: string;
   password: string;
+  username?: string;
+  role?: string;
+};
+
+type AdminCreateUserData = {
+  email: string;
+  username?: string;
+  role: 'admin' | 'user';
 };
 
 type LoginResponse = {
@@ -24,10 +33,47 @@ type UpdateProfileData = {
 
 export const userService = {
   createUser: async (userData: UserData): Promise<ReturnType<typeof userDTO.getUserDTO>> => {
+    const existingUser = await prisma.user.findUnique({ where: { email: userData.email } });
+    if (existingUser) throw new Error('Email is already in use');
+
     const hashedPassword = await bcrypt.hash(userData.password, 10);
     const user = await prisma.user.create({
-      data: { ...userData, password: hashedPassword, role: 'user' },
+      data: {
+        email: userData.email,
+        password: hashedPassword,
+        username: userData.username,
+        role: userData.role || 'user',
+      },
     });
+    return userDTO.getUserDTO(user);
+  },
+
+  adminCreateUser: async (userData: AdminCreateUserData): Promise<ReturnType<typeof userDTO.getUserDTO>> => {
+    const existingUser = await prisma.user.findUnique({ where: { email: userData.email } });
+    if (existingUser) throw new Error('Email is already in use');
+
+    const temporaryPassword = randomBytes(9).toString('base64url');
+    const hashedPassword = await bcrypt.hash(temporaryPassword, 10);
+
+    const user = await prisma.user.create({
+      data: {
+        email: userData.email,
+        username: userData.username,
+        role: userData.role,
+        password: hashedPassword,
+      },
+    });
+
+    try {
+      await emailService.sendUserCredentialsEmail({
+        to: user.email,
+        temporaryPassword,
+      });
+    } catch (error) {
+      await prisma.user.delete({ where: { id: user.id } });
+      throw error;
+    }
+
     return userDTO.getUserDTO(user);
   },
 

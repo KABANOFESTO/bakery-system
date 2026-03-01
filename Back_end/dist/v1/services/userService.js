@@ -6,15 +6,51 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.userService = void 0;
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const crypto_1 = require("crypto");
 const userDTO_1 = __importDefault(require("../DTOs/userDTO"));
 const database_1 = require("../config/database");
 const cloudinary_1 = require("../utils/cloudinary");
+const emailService_1 = require("../utils/emailService");
 exports.userService = {
     createUser: async (userData) => {
+        const existingUser = await database_1.prisma.user.findUnique({ where: { email: userData.email } });
+        if (existingUser)
+            throw new Error('Email is already in use');
         const hashedPassword = await bcryptjs_1.default.hash(userData.password, 10);
         const user = await database_1.prisma.user.create({
-            data: { ...userData, password: hashedPassword, role: 'user' },
+            data: {
+                email: userData.email,
+                password: hashedPassword,
+                username: userData.username,
+                role: userData.role || 'user',
+            },
         });
+        return userDTO_1.default.getUserDTO(user);
+    },
+    adminCreateUser: async (userData) => {
+        const existingUser = await database_1.prisma.user.findUnique({ where: { email: userData.email } });
+        if (existingUser)
+            throw new Error('Email is already in use');
+        const temporaryPassword = (0, crypto_1.randomBytes)(9).toString('base64url');
+        const hashedPassword = await bcryptjs_1.default.hash(temporaryPassword, 10);
+        const user = await database_1.prisma.user.create({
+            data: {
+                email: userData.email,
+                username: userData.username,
+                role: userData.role,
+                password: hashedPassword,
+            },
+        });
+        try {
+            await emailService_1.emailService.sendUserCredentialsEmail({
+                to: user.email,
+                temporaryPassword,
+            });
+        }
+        catch (error) {
+            await database_1.prisma.user.delete({ where: { id: user.id } });
+            throw error;
+        }
         return userDTO_1.default.getUserDTO(user);
     },
     getUserById: async (userId) => {

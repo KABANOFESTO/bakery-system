@@ -4,14 +4,38 @@ exports.userController = void 0;
 const userService_1 = require("../services/userService");
 const apiResponse_1 = require("../utils/apiResponse");
 exports.userController = {
-    createUser: async (req, res) => {
-        const userData = req.body;
+    adminCreateUser: async (req, res) => {
+        const { email, username, role } = req.body;
+        if (!email || !role) {
+            apiResponse_1.apiResponse.error(res, 'Email and role are required', 400);
+            return;
+        }
+        if (role !== 'admin' && role !== 'user') {
+            apiResponse_1.apiResponse.error(res, 'Role must be admin or user', 400);
+            return;
+        }
         try {
-            const user = await userService_1.userService.createUser(userData);
+            const user = await userService_1.userService.adminCreateUser({ email, username, role });
             apiResponse_1.apiResponse.success(res, user, 201);
         }
         catch (error) {
-            apiResponse_1.apiResponse.error(res, error.message, 400);
+            const message = error instanceof Error ? error.message : 'Failed to create user';
+            apiResponse_1.apiResponse.error(res, message, 400);
+        }
+    },
+    createUser: async (req, res) => {
+        const { email, password, username } = req.body;
+        if (!email || !password) {
+            apiResponse_1.apiResponse.error(res, 'Email and password are required', 400);
+            return;
+        }
+        try {
+            const user = await userService_1.userService.createUser({ email, password, username, role: 'user' });
+            apiResponse_1.apiResponse.success(res, user, 201);
+        }
+        catch (error) {
+            const message = error instanceof Error ? error.message : 'Failed to create user';
+            apiResponse_1.apiResponse.error(res, message, 400);
         }
     },
     getUser: async (req, res) => {
@@ -25,7 +49,8 @@ exports.userController = {
             apiResponse_1.apiResponse.success(res, user);
         }
         catch (error) {
-            apiResponse_1.apiResponse.error(res, error.message, 400);
+            const message = error instanceof Error ? error.message : 'Failed to get user';
+            apiResponse_1.apiResponse.error(res, message, 400);
         }
     },
     getAllUsers: async (_req, res) => {
@@ -34,7 +59,8 @@ exports.userController = {
             apiResponse_1.apiResponse.success(res, users);
         }
         catch (error) {
-            apiResponse_1.apiResponse.error(res, error.message, 400);
+            const message = error instanceof Error ? error.message : 'Failed to get users';
+            apiResponse_1.apiResponse.error(res, message, 400);
         }
     },
     loginUser: async (req, res) => {
@@ -44,7 +70,8 @@ exports.userController = {
             apiResponse_1.apiResponse.success(res, { user, token });
         }
         catch (error) {
-            apiResponse_1.apiResponse.error(res, error.message, 401);
+            const message = error instanceof Error ? error.message : 'Failed to login';
+            apiResponse_1.apiResponse.error(res, message, 401);
         }
     },
     updateProfile: async (req, res) => {
@@ -77,21 +104,22 @@ exports.userController = {
             });
         }
         catch (error) {
+            const message = error instanceof Error ? error.message : 'Failed to update profile';
             // Handle specific error types
-            if (error.message.includes('Current password')) {
-                apiResponse_1.apiResponse.error(res, error.message, 400);
+            if (message.includes('Current password')) {
+                apiResponse_1.apiResponse.error(res, message, 400);
             }
-            else if (error.message.includes('password')) {
-                apiResponse_1.apiResponse.error(res, error.message, 400);
+            else if (message.includes('password')) {
+                apiResponse_1.apiResponse.error(res, message, 400);
             }
-            else if (error.message.includes('Username')) {
-                apiResponse_1.apiResponse.error(res, error.message, 400);
+            else if (message.includes('Username')) {
+                apiResponse_1.apiResponse.error(res, message, 400);
             }
-            else if (error.message.includes('profile picture')) {
-                apiResponse_1.apiResponse.error(res, error.message, 400);
+            else if (message.includes('profile picture')) {
+                apiResponse_1.apiResponse.error(res, message, 400);
             }
             else {
-                apiResponse_1.apiResponse.error(res, error.message || 'Failed to update profile', 400);
+                apiResponse_1.apiResponse.error(res, message, 400);
             }
         }
     },

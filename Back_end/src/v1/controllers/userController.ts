@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import { userService } from '../services/userService';
 import { apiResponse } from '../utils/apiResponse';
-import { any } from 'joi';
 
 interface AuthenticatedRequest extends Request {
   user?: {
@@ -12,13 +11,49 @@ interface AuthenticatedRequest extends Request {
 }
 
 export const userController = {
-  createUser: async (req: Request, res: Response): Promise<void> => {
-    const userData = req.body;
+  adminCreateUser: async (req: AuthenticatedRequest, res: Response): Promise<void> => {
+    const { email, username, role } = req.body as {
+      email?: string;
+      username?: string;
+      role?: 'admin' | 'user';
+    };
+
+    if (!email || !role) {
+      apiResponse.error(res, 'Email and role are required', 400);
+      return;
+    }
+    if (role !== 'admin' && role !== 'user') {
+      apiResponse.error(res, 'Role must be admin or user', 400);
+      return;
+    }
+
     try {
-      const user = await userService.createUser(userData);
+      const user = await userService.adminCreateUser({ email, username, role });
       apiResponse.success(res, user, 201);
-    } catch (error: any) {
-      apiResponse.error(res, error.message, 400);
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Failed to create user';
+      apiResponse.error(res, message, 400);
+    }
+  },
+
+  createUser: async (req: Request, res: Response): Promise<void> => {
+    const { email, password, username } = req.body as {
+      email?: string;
+      password?: string;
+      username?: string;
+    };
+
+    if (!email || !password) {
+      apiResponse.error(res, 'Email and password are required', 400);
+      return;
+    }
+
+    try {
+      const user = await userService.createUser({ email, password, username, role: 'user' });
+      apiResponse.success(res, user, 201);
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Failed to create user';
+      apiResponse.error(res, message, 400);
     }
   },
 
@@ -31,8 +66,9 @@ export const userController = {
         return;
       }
       apiResponse.success(res, user);
-    } catch (error: any) {
-      apiResponse.error(res, error.message, 400);
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Failed to get user';
+      apiResponse.error(res, message, 400);
     }
   },
 
@@ -40,8 +76,9 @@ export const userController = {
     try {
       const users = await userService.getAllUsers();
       apiResponse.success(res, users);
-    } catch (error: any) {
-      apiResponse.error(res, error.message, 400);
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Failed to get users';
+      apiResponse.error(res, message, 400);
     }
   },
 
@@ -50,8 +87,9 @@ export const userController = {
     try {
       const { user, token } = await userService.loginUser(email, password);
       apiResponse.success(res, { user, token });
-    } catch (error: any) {
-      apiResponse.error(res, error.message, 401);
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Failed to login';
+      apiResponse.error(res, message, 401);
     }
   },
 
@@ -89,18 +127,19 @@ export const userController = {
         username: result.username,
         profile_picture: result.profilePicture,
       });
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Failed to update profile';
       // Handle specific error types
-      if (error.message.includes('Current password')) {
-        apiResponse.error(res, error.message, 400);
-      } else if (error.message.includes('password')) {
-        apiResponse.error(res, error.message, 400);
-      } else if (error.message.includes('Username')) {
-        apiResponse.error(res, error.message, 400);
-      } else if (error.message.includes('profile picture')) {
-        apiResponse.error(res, error.message, 400);
+      if (message.includes('Current password')) {
+        apiResponse.error(res, message, 400);
+      } else if (message.includes('password')) {
+        apiResponse.error(res, message, 400);
+      } else if (message.includes('Username')) {
+        apiResponse.error(res, message, 400);
+      } else if (message.includes('profile picture')) {
+        apiResponse.error(res, message, 400);
       } else {
-        apiResponse.error(res, error.message || 'Failed to update profile', 400);
+        apiResponse.error(res, message, 400);
       }
     }
   },
